@@ -41,7 +41,7 @@ app.post("/poll", (req, res, next) => {
   res.status(200).json({ msg: "success", status: 200 });
 });
 
-const PORT = 8080 || process.env.PORT;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`server started at port ${PORT}`);
 });
