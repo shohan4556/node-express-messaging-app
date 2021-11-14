@@ -8,7 +8,7 @@ const app = express();
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(__dirname + "/src/public"));
+app.use(express.static(__dirname + "/public"));
 
 //50 message
 const msg = new buffer(50);
