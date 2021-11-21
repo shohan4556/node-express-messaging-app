@@ -2,6 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import buffer from "nanobuffer";
 import path from "path";
+import { initDB } from "./database.js";
 const __dirname = path.resolve();
 const app = express();
 
@@ -22,10 +23,12 @@ const getMsgs = () => Array.from(msg).reverse();
 app.get("/", (req, res, next) => {
   //res.send("Hello Shohan !").status(200);
   //res.send("index.html");
+  initDB();
   res.sendfile("/index.html");
 });
 
 app.get("/poll", (req, res, next) => {
+  initDB();
   res.status(200).json({
     msg: getMsgs()
   });
