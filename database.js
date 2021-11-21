@@ -1,19 +1,35 @@
 import env from "dotenv";
-env.config();
 import mongoose from "mongoose";
+
+env.config();
 
 export const initDB = () => {
   console.log("init databse");
   connectToDB();
 };
 
+export const createMessageModel = () => {
+  const schema = new mongoose.Schema({
+    username: String,
+    message: String,
+    time: {
+      type: Date,
+      default: Date.now
+    }
+  });
+
+  //todo check if any name is null then insert a default value
+
+  const messageModel = mongoose.model("message", schema);
+  return messageModel;
+};
+
 const connectToDB = () => {
   const uri = process.env.MONGO_CONNECTION_URL;
-
   mongoose.connect(uri);
 
   mongoose.connection.on("connected", () => {
-    console.log("connected to mongo!");
+    console.log("connected to mongo!!!\n");
   });
 
   mongoose.connection.on("error", (error) => {
@@ -21,22 +37,3 @@ const connectToDB = () => {
     process.exit(1);
   });
 };
-
-// let database = {
-//   initDB
-// };
-
-// module.exports = { database };
-
-// const { MongoClient } = require("mongodb");
-// const uri =
-//   "mongodb+srv://shohan:<password>@cluster0.k4qrc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-// const client = new MongoClient(uri, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true
-// });
-// client.connect((err) => {
-//   const collection = client.db("test").collection("devices");
-//   // perform actions on the collection object
-//   client.close();
-// });
