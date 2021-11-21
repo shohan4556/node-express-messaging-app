@@ -1,6 +1,5 @@
 import express from "express";
 import morgan from "morgan";
-import buffer from "nanobuffer";
 import path from "path";
 import { initDB, createMessageModel } from "./database.js";
 const __dirname = path.resolve();
@@ -19,12 +18,12 @@ const messageModel = await createMessageModel();
 
 //50 message
 const msg = [];
-msg.push({
-  user: "shohan",
-  text: "hello world",
-  time: Date.now()
-});
-const getMsgs = () => Array.from(msg).reverse();
+// msg.push({
+//   user: "shohan",
+//   text: "hello world",
+//   time: Date.now()
+// });
+// const getMsgs = () => Array.from(msg).reverse();
 
 app.get("/", (req, res, next) => {
   //res.send("Hello Shohan !").status(200);
